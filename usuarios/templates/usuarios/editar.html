@@ -1,0 +1,56 @@
+{% extends 'usuarios/base.html' %}
+
+{% block aba %}Editar Item{% endblock %}
+
+{% block titulo %}Editar Item{% endblock %}
+
+{% block conteudo %}
+
+<div class="container mt-4">
+    <h3 class="mb-4">Editar Item do Estoque</h3>
+    
+    <form action="{% url 'editar' lista_Item.pk %}" method="POST"> 
+        {% csrf_token %}
+        
+        <table class="table table-bordered">
+            <!-- Primeira linha da tabela com Nome e Item -->
+            <tr>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Item" value="{{ lista_Item.nome }}" required>
+                        <label for="nome">Nome do Funcionario</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="item" name="item" placeholder="Descrição do Item" value="{{ lista_Item.item }}" required>
+                        <label for="item">Descrição do Item</label>
+                    </div>
+                </td>
+            </tr>
+            <hr>
+            <!-- Segunda linha da tabela com Quantidade -->
+            <tr>
+                <td colspan="2">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade" value="{{ lista_Item.quantidade }}" required>
+                        <label for="quantidade">Quantidade</label>
+                    </div>
+                </td>
+            </tr>
+            <hr>
+             <!-- Botões de ação na lateral direita -->
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary me-2">Atualizar</button>
+            <a href="#" onclick="history.back();" class="btn btn-secondary">Cancelar</a>
+
+        </div>
+        
+        </table>
+
+    </form>
+</div>
+
+
+
+{% endblock %}

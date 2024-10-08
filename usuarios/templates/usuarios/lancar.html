@@ -1,0 +1,49 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+
+{% block aba %}Cadastrar Item{% endblock %}
+
+{% block conteudo %}
+<div class="container px-4 px-lg-0" style = "margin-top: -80px;">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <!-- Ajuste a margem superior para ficar mais perto da navbar -->
+            <div class="card border-0 shadow rounded-3 my-0">
+                <div class="card-body p-2 p-sm-3">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastro de Item</h5>
+                    <form action="{% url 'lancar' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item">Item:</label>
+                            <input type="text" id="item" name="item" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade:</label>
+                            <input type="number" id="quantidade" name="quantidade" class="form-control" required>
+                        </div>
+                        
+                        
+                        <button type="submit" class="btn btn-primary mt-4">Lançar</button>
+                    </form>                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+        const dataInput = document.querySelector('input[type="date"]').value;
+        const dataAtual = new Date().toISOString().split('T')[0];
+
+        if (dataInput < dataAtual) {
+            alert('A data de validade deve ser maior ou igual à data atual.');
+            event.preventDefault();  // Impede o envio do formulário se a data for inválida
+        }
+    });
+</script>
+{% endblock %}

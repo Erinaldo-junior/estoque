@@ -1,0 +1,16 @@
+{% extends 'usuarios/base.html' %}
+
+{% block aba %}Excluir Item{% endblock %}
+
+{% block titulo %}Item{% endblock %}
+
+{% block conteudo %} 
+<h3>Exclusão do Item Selecionado</h3>
+<hr>
+
+<p>Tem certeza que deseja excluir o item <strong>{{ lista_Item.nome }}</strong>?</p>
+<div class="delete">
+    <a href="{% url 'excluir' lista_Item.pk %}" class="btn btn-success btn-sm">Sim</a>
+    <a href="{% url 'alterar' %}" class="btn btn-danger btn-sm">Não</a>
+</div>
+{% endblock %}

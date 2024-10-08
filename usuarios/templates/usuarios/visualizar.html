@@ -1,0 +1,47 @@
+{% extends 'usuarios/base.html' %}
+
+{% block aba %}Visualizar Itens{% endblock %}
+
+{% block titulo %}Visualizar Itens{% endblock %}
+
+{% block conteudo %}
+<div class="bg-light p-5" style="border-radius: 15px;">
+    <h3>Visualização de Itens registrados</h3>
+    <hr>
+    <form action="{% url 'visualizar' %}" method="POST">
+        {% csrf_token %}
+        <div class="filter">
+            <label for="disciplinaName">Filtrar por Item: </label>
+            <select name="categoria">
+                <option>Todas as categorias</option>
+                {% for campo in lista_opcoes %}
+                    <option value="{{ campo }}">{{ campo }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </form>
+    
+    <div class="table-responsive mt-4">
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Item</th>
+                <th>Quantidade</th>
+            </tr>
+            {% for campo in lista_Item %}
+            <tr>
+                <td>{{ campo.nome }}</td>
+                <td>{{ campo.item }}</td>
+                <td>{{ campo.quantidade }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nenhum registro encontrado.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<hr>
+{% endblock %}
